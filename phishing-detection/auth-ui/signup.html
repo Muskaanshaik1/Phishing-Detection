@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberGuard AI | Signup</title>
+    <link rel="stylesheet" href="auth-style.css">
+    <link href=sinup.css rel="stylesheet">
+</head>
+<body>
+    <div class="stars-overlay"></div>
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="terminal-header">
+                <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+                <span class="title">SECURE_ENROLLMENT.EXE</span>
+            </div>
+            
+            <div class="brand-section">
+                <h2>CYBER<span>GUARD</span></h2>
+                <p>Initialize Agent Credentials</p>
+            </div>
+
+            <div class="form-group">
+                <label>Access Email</label>
+                <input type="email" id="email" placeholder="agent@cyberguard.io" required>
+            </div>
+
+            <div class="form-group">
+                <label>Security Cipher (Password)</label>
+                <input type="password" id="password" placeholder="••••••••" required>
+            </div>
+
+            <button class="glow-btn" onclick="signup()">CREATE ACCOUNT</button>
+
+            <p class="switch-link">
+                Operational agent? <a href="login.html">Login to Sector</a>
+            </p>
+
+            <div id="msg" class="console-output"></div>
+        </div>
+    </div>
+
+    <script>
+        function signup() {
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+            const msg = document.getElementById("msg");
+
+            if(!email || !password) {
+                msg.innerHTML = "> ERROR: EMPTY_FIELDS_DETECTED";
+                msg.className = "console-output error";
+                return;
+            }
+
+            fetch("http://localhost:8080/api/auth/signup", {
+                method: "POST",
+                headers: {"Content-Type":"application/json"},
+                body: JSON.stringify({ email, password })
+            })
+            .then(r => r.text())
+            .then(t => {
+                msg.innerText = "> " + t.toUpperCase();
+                if (t.toLowerCase().includes("successful")) {
+                    msg.className = "console-output success";
+                    setTimeout(() => window.location.href = "login.html", 1500);
+                } else {
+                    msg.className = "console-output error";
+                }
+            })
+            .catch(err => {
+                msg.innerText = "> ERROR: AUTH_SERVER_OFFLINE";
+                msg.className = "console-output error";
+            });
+        }
+    </script>
+</body>
+</html>

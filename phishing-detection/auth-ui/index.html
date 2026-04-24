@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Phishing Detection System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <div class="logo">🛡️ Phishing Detection System</div>
+    <div class="nav">
+        <!-- CHANGED -->
+        <button class="nav-btn" onclick="window.location.href='login.html'">
+            Login
+        </button>
+
+        <!-- CHANGED -->
+        <button class="nav-btn outline" onclick="window.location.href='signup.html'">
+            Sign Up
+</footer>
+<script>
+const token = localStorage.getItem("jwt");
+
+const navDiv = document.querySelector(".nav");
+const heroActions = document.querySelector(".hero-actions");
+
+if (token) {
+    // User is logged in
+    navDiv.innerHTML = `
+        <button class="nav-btn" onclick="goPhishing()">Phishing Check</button>
+        <button class="nav-btn outline" onclick="logout()">Logout</button>
+    `;
+
+    heroActions.innerHTML = `
+        <button class="primary" onclick="goPhishing()">Check a Website</button>
+        <button class="secondary" onclick="logout()">Logout</button>
+    `;
+}
+
+function goPhishing() {
+    window.location.href = "phishing.html";
+}
+
+function logout() {
+    localStorage.removeItem("jwt");
+    alert("Logged out successfully");
+    window.location.href = "index.html";
+}
+</script>
+
+</body>
+</html>

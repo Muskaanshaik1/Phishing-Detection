@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberGuard AI | Spear Phishing Intelligence</title>
+    <link rel="stylesheet" href="spear.css">
+</head>
+<body>
+    <header class="tactical-header">
+        <div class="logo">SPEAR<span>INTEL</span></div>
+        <button class="exit-btn" onclick="window.location.href='index.html'">CLOSE SECTOR</button>
+    </header>
+
+    <div class="main-wrapper">
+        <div class="intel-grid">
+            <section class="card analysis-card">
+                <h2>Target Content Analysis</h2>
+                <div class="input-group">
+                    <label>Target Name/Profile</label>
+                    <input type="text" id="targetProfile" placeholder="e.g. Finance Manager, CEO Office">
+                </div>
+                <div class="input-group">
+                    <label>Message Body</label>
+                    <textarea id="smsText" placeholder="Paste the suspicious targeted message here..."></textarea>
+                </div>
+                <button class="scan-btn" onclick="checkSpear()">RUN NEURAL PROFILING</button>
+                <div id="result"></div>
+            </section>
+
+            <section class="card log-card">
+                <h3>Intelligence Logs</h3>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Target</th>
+                                <th>Risk Score</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="historyBody">
+                            </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+    </div>
+    <script src="spear.js"></script>
+</body>
+</html>

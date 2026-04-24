@@ -1,0 +1,15 @@
+CREATE TABLE SCAN_HISTORY (
+
+id INT AUTO_INCREMENT PRIMARY KEY,
+
+type VARCHAR(50),
+
+content_snippet VARCHAR(255),
+
+risk_score INT,
+
+result VARCHAR(50),
+
+scan_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+
+); 

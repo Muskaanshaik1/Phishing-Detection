@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberGuard AI | SMS Security</title>
+    <link rel="stylesheet" href="sms.css">
+</head>
+<body>
+    <div class="mobile-container">
+        <header class="sms-header">
+            <button class="back-link" onclick="window.location.href='index.html'">← Dashboard</button>
+            <h2>SMS <span>Scanner</span></h2>
+        </header>
+
+        <main class="sms-content">
+            <div class="info-box">
+                <p>Paste the suspicious message content to check for malicious links or sender spoofing.</p>
+            </div>
+
+            <div class="input-area">
+                <label for="smsText">Message Transcript</label>
+                <textarea id="smsText" placeholder="e.g. Your account has been locked. Click here: bit.ly/fake-link"></textarea>
+                
+                <button class="scan-btn" onclick="checkSMS()">Check Message Risk</button>
+            </div>
+
+            <div id="result" class="result-box"></div>
+
+            <section class="sms-history">
+                <h3>Recent Scans</h3>
+                <div class="history-list" id="historyBody">
+                    </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="sms.js"></script>
+</body>
+</html>

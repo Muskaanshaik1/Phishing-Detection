@@ -1,0 +1,73 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background: #f0f4f8;
+    color: #1a202c;
+}
+
+.background-blobs {
+    position: fixed;
+    top: -100px; right: -100px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(49, 130, 206, 0.15) 0%, transparent 70%);
+    z-index: -1;
+}
+
+.main-container { padding: 40px 5%; }
+
+.vishing-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.highlight { color: #3182ce; font-weight: 600; }
+
+.glass-card {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 16px;
+    padding: 25px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 25px;
+}
+
+/* Audio Upload Zone */
+.audio-upload-zone {
+    border: 2px dashed #cbd5e0;
+    border-radius: 12px;
+    padding: 50px 20px;
+    text-align: center;
+    cursor: pointer;
+    background: #f8fafc;
+    transition: 0.3s;
+}
+
+.audio-upload-zone:hover {
+    border-color: #3182ce;
+    background: #ebf8ff;
+}
+
+.btn-primary {
+    background: #3182ce;
+    color: white;
+    padding: 14px 28px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn-primary:hover { background: #2c5282; transform: translateY(-2px); }
+
+table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+th { text-align: left; padding: 12px; color: #718096; border-bottom: 2px solid #edf2f7; }
+td { padding: 12px; border-bottom: 1px solid #edf2f7; font-size: 0.9rem; }

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Initialize Analysis | CyberGuard AI</title>
+    <link rel="stylesheet" href="email.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .selection-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            border: 1px solid #e2e8f0;
+            border-radius: 15px;
+            background: #f8fafc;
+        }
+        .source-card {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 25px 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .source-card:hover {
+            border-color: #3182ce;
+            transform: translateY(-5px);
+            box-shadow: 0 4px 12px rgba(49, 130, 206, 0.1);
+        }
+        .source-card i { font-size: 2.2rem; color: #4a5568; margin-bottom: 12px; display: block; }
+        .source-card span { font-weight: 600; color: #2d3748; display: block; }
+        .source-card:hover i, .source-card:hover span { color: #3182ce; }
+    </style>
+</head>
+<body>
+    <div class="container" style="text-align: center; margin-top: 50px;">
+        <h1 id="selection-title" style="color: #2c5282;">Initialize Analysis</h1>
+        <p style="color: #718096; margin-bottom: 30px;">Step 1: Select the expected sender category</p>
+
+        <div class="selection-grid">
+            <div class="source-card" onclick="selectSource('bank')"><i class="fas fa-university"></i><span>Banking</span></div>
+            <div class="source-card" onclick="selectSource('office')"><i class="fas fa-briefcase"></i><span>Corporate</span></div>
+            <div class="source-card" onclick="selectSource('social')"><i class="fas fa-share-alt"></i><span>Social Media</span></div>
+            <div class="source-card" onclick="selectSource('ecommerce')"><i class="fas fa-shopping-cart"></i><span>E-Commerce</span></div>
+            <div class="source-card" onclick="selectSource('government')"><i class="fas fa-landmark"></i><span>Government</span></div>
+            <div class="source-card" onclick="selectSource('unknown')"><i class="fas fa-question-circle"></i><span>Unknown</span></div>
+        </div>
+    </div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const mode = urlParams.get('mode') || 'email'; 
+        document.getElementById('selection-title').innerText = `Initialize ${mode.toUpperCase()} Analysis`;
+
+        function selectSource(source) {
+            localStorage.setItem('selectedSector', source);
+            if (mode === 'sms') window.location.href = 'sms.html';
+            else if (mode === 'web') window.location.href = 'website.html';
+            else window.location.href = 'email.html';
+        }
+    </script>
+</body>
+</html>

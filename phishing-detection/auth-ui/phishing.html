@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AI Phishing Detection Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .hidden { display: none !important; }
+        .container { max-width: 800px; margin: 50px auto; padding: 30px; background: white; border-radius: 12px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); }
+        .input-group { display: flex; gap: 10px; margin-top: 15px; }
+        input[type="text"] { flex: 1; padding: 12px; border: 1px solid #ccc; border-radius: 5px; }
+        .btn-analyze { padding: 12px 25px; background: #2c3e50; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; }
+        textarea { width: 100%; margin-top: 10px; padding: 12px; border: 1px solid #ccc; border-radius: 5px; font-family: sans-serif; resize: vertical; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 id="pageTitle">Phishing Detection Dashboard</h1>
+
+        <div id="websiteSection">
+            <h3>Website URL Check</h3>
+            <div class="input-group">
+                <input type="text" id="urlInput" list="urlSuggestions" placeholder="Search or type a URL (e.g., google.com)">
+                <datalist id="urlSuggestions">
+                    <option value="https://www.google.com">
+                    <option value="https://www.onlinesbi.sbi">
+                    <option value="https://www.paypal.com">
+                    <option value="https://www.amazon.in">
+                    <option value="http://secure-login-account.com">
+                    <option value="https://www.google.com">
+                    <option value="https://www.onlinesbi.sbi">
+    
+
+    <option value="https://www.microsoft.com">
+    <option value="https://vtop.vit.ac.in">
+    
+    <option value="https://vtop.vit.ac.in">
+    <option value="https://www.iitb.ac.in">
+    <option value="https://www.harvard.edu">
+    <option value="https://www.ox.ac.uk">
+    <option value="https://www.stanford.edu">
+    <option value="https://www.mit.edu">
+    <option value="https://www.ucla.edu">
+    <option value="https://www.cam.ac.uk">
+    <option value="https://www.du.ac.in">
+    
+    <option value="https://www.ignou.ac.in">
+    <option value="https://www.annauniv.edu">
+    <option value="https://www.jntu.ac.in">
+    <option value="https://www.mu.ac.in">
+    <option value="https://www.tirumala.org">
+    <option value="https://shreeashapura.com">
+    <option value="https://www.shirdi.org.in">
+    <option value="https://www.maavaishnodevi.org">
+    <option value="https://www.badrinath-kedarnath.gov.in">
+    <option value="https://www.siddhivinayak.org">
+    <option value="https://www.somnath.org">
+    <option value="https://www.golden-temple.org">
+    
+    <option value="http://online-prasadam-booking.xyz">
+    <option value="http://tirupati-darshan-tickets-now.com">
+    <option value="http://temple-donation-portal.net/pay">
+    <option value="https://shirdi-sai-baba-trust.security-update.in">
+    <option value="http://vtop-login-verify.xyz/vit">
+    <option value="http://student-results-2026.online/login">
+    <option value="http://university-scholarship-portal.net/apply">
+    <option value="http://iit-bombay-admission-form.in/secure">
+    <option value="http://verify-my-paypal-account-now.com/login">
+    <option value="https://faceb00k-support-center.xyz">
+    <option value="http://192.168.1.1/login.html">
+    <option value="https://amazon-prime-rewards.net/claim">
+    <option value="http://bank-of-america-security-update.in">
+                </datalist>
+                <button class="btn-analyze" onclick="checkWebsite()">Analyze URL</button>
+            </div>
+        </div>
+
+        <div id="emailSection" class="hidden" style="margin-top: 20px;">
+            <h3>Email & SMS Analysis</h3>
+            <textarea id="phishText" rows="6" placeholder="Paste the suspicious SMS or Email text here..."></textarea>
+            <button class="btn-analyze" style="width: 100%; margin-top: 10px;" onclick="checkTextPhishing()">Detect Phishing</button>
+        </div>
+        
+        <div style="margin-top: 20px; text-align: center;">
+            <a href="phishing.html?mode=website" style="margin-right: 15px;">URL Mode</a>
+            <a href="phishing.html?mode=email">SMS/Email Mode</a>
+        </div>
+    </div>
+
+    <script>
+        // Toggle between URL and Email modes based on URL parameter
+        document.addEventListener("DOMContentLoaded", () => {
+            const mode = new URLSearchParams(window.location.search).get('mode');
+            if (mode === 'email') {
+                document.getElementById("websiteSection").classList.add("hidden");
+                document.getElementById("emailSection").classList.remove("hidden");
+                document.getElementById("pageTitle").innerText = "SMS & Email Phishing Detector";
+            }
+        });
+
+        // FUNCTION 1: Handles Website URL Checks
+        function checkWebsite() {
+            const urlValue = document.getElementById('urlInput').value;
+            if (!urlValue) return alert("Please enter a URL.");
+
+            let formattedUrl = urlValue.startsWith('http') ? urlValue : 'https://' + urlValue;
+
+            fetch(`http://localhost:8080/api/phishing/check?url=${encodeURIComponent(formattedUrl)}`)
+                .then(res => res.json())
+                .then(data => {
+                    const query = new URLSearchParams({
+                        url: formattedUrl,
+                        score: data.risk || 0,
+                        level: data.level || "Low Risk"
+                    });
+                    window.location.href = `result.html?${query.toString()}`;
+                })
+                .catch(err => alert("Backend Error: Ensure Java and Python terminals are running."));
+        }
+
+        // FUNCTION 2: Handles SMS/Email Text Analysis (THIS WAS MISSING)
+        function checkTextPhishing() {
+            const textValue = document.getElementById('phishText').value;
+            if (!textValue) return alert("Please paste some text to analyze.");
+
+            // Calls your SmsPhishingController on Port 8080
+            fetch(`http://localhost:8080/api/sms/check`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ text: textValue }) 
+            })
+            .then(res => {
+                if (!res.ok) throw new Error("Backend not reachable");
+                return res.json();
+            })
+            .then(data => {
+                const query = new URLSearchParams({
+                    url: "SMS Content Analysis",
+                    score: data.risk || 0,
+                    level: data.level || "Neutral"
+                });
+                window.location.href = `result.html?${query.toString()}`;
+            })
+            .catch(err => {
+                console.error(err);
+                alert("SMS Backend Error: Ensure your Java Bridge and Python ML are both running.");
+            });
+        }
+    </script>
+</body> 
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Website Phishing Detection</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>Website Phishing Detection</h1>
+    <p class="subtitle">Analyze a website and check its phishing risk</p>
+
+    <div class="input-box">
+        <input type="text" id="urlInput" placeholder="Enter website (e.g. google.com)">
+        <button onclick="checkWebsite()">Check Website</button>
+    </div>
+
+    <div id="resultCard" class="result-card hidden">
+        <h2>Analysis Result</h2>
+
+        <div id="riskBadge" class="risk-badge">Risk</div>
+
+        <p><strong>Risk Score:</strong> <span id="riskScore"></span>%</p>
+
+        <h3>Risk Factors</h3>
+        <ul id="factorsList"></ul>
+
+        <h3>Safety Suggestions</h3>
+        <ul id="suggestionsList"></ul>
+
+        <div class="actions">
+            <button id="visitBtn" onclick="visitWebsite()">Visit Website</button>
+        </div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

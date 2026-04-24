@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberGuard AI | Vishing Analysis</title>
+    <link rel="stylesheet" href="vishing.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-blobs"></div>
+    
+    <div class="main-container">
+        <header class="vishing-header">
+            <div class="header-left">
+                <span class="icon-pulse"></span>
+                <h1>Vishing <span class="highlight">Analysis</span></h1>
+            </div>
+            <button class="btn-secondary" onclick="window.location.href='phishing-types.html'" style="cursor:pointer; padding: 10px 20px; border-radius: 8px; border: 1px solid #cbd5e0; background: white;">Return to Dashboard</button>
+        </header>
+
+        <div class="dashboard-grid">
+            <section class="glass-card analysis-input">
+                <div class="card-title">
+                    <h2>Voice Pattern Analysis</h2>
+                    <span class="badge" style="background: #ebf8ff; color: #3182ce; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: bold;">NEURAL ENGINE ACTIVE</span>
+                </div>
+                <p class="subtitle">Upload a call recording (.wav, .mp3) for deep forensic analysis.</p>
+                
+                <div class="audio-upload-zone" id="dropZone" onclick="document.getElementById('audioFile').click()">
+                    <div class="upload-content">
+                        <i class="fas fa-file-audio" style="font-size: 3rem; color: #3182ce; margin-bottom: 15px;"></i>
+                        <p id="file-label">Click or Drag & Drop Call Recording</p>
+                        <span id="file-name-display" style="font-size: 0.85rem; color: #3182ce; font-weight: 600;"></span>
+                    </div>
+                    <input type="file" id="audioFile" accept="audio/*" style="display: none;" onchange="updateFileName()">
+                </div>
+
+                <div id="transcript-container" style="display:none; margin-top: 15px;">
+                    <label style="font-size: 0.8rem; font-weight: 600; color: #4a5568;">Detected Transcript:</label>
+                    <div id="detectedText" style="background: #f7fafc; padding: 15px; border-radius: 10px; font-style: italic; border: 1px solid #e2e8f0; margin-top: 5px; color: #2d3748;"></div>
+                </div>
+                
+                <div class="button-group" style="margin-top: 25px; display: flex; align-items: center; gap: 20px;">
+                    <button class="btn-primary" onclick="analyzeAudio()">Run Forensic Scan</button>
+                    <span id="loading-text" class="status-msg">Awaiting Audio Input...</span>
+                </div>
+                <div id="result" class="result-display"></div>
+            </section>
+
+            <section class="glass-card history-panel">
+                <h3>Recent Call Intelligence</h3>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Snippet</th>
+                                <th>Risk</th>
+                                <th>Verdict</th>
+                            </tr>
+                        </thead>
+                        <tbody id="historyBody"></tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script src="vishing.js"></script>
+</body>
+</html>

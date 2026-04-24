@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login</title>
+  <link rel="stylesheet" href="login.css">
+  
+
+
+
+  
+
+</head>
+<body>
+
+<div class="box">
+  <h2>Login</h2>
+
+  <input id="email" type="email" placeholder="Email">
+  <input id="password" type="password" placeholder="Password">
+
+  <button type="button" onclick="login()">Login</button>
+
+
+
+  <p id="msg"></p>
+
+  <button onclick="logout()">Logout</button>
+<p><a href="signup.html">New user? Signup</a></p>
+</div>
+<script>
+  const msg = document.getElementById("msg");
+
+
+
+function login() {
+  fetch("http://localhost:8080/api/auth/login", {
+    method: "POST",
+    headers: {"Content-Type":"application/json"},
+    body: JSON.stringify({
+      email: email.value,
+      password: password.value
+    })
+  })
+  .then(r => r.text())
+  .then(token => {
+    if (token.startsWith("ey")) {
+      localStorage.setItem("jwt", token);
+
+      // 🔴 STEP 2 IS HERE
+      window.location.href = "phishing-types.html";
+    } else {
+      msg.innerText = token;
+      msg.style.color = "red";
+    }
+  });
+}
+
+
+
+function logout() {
+  localStorage.removeItem("jwt");
+  msg.innerText = "Logged out successfully";
+  msg.style.color = "black";
+}
+
+
+</script>
+
+</body>
+</html>

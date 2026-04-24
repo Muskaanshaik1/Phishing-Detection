@@ -1,0 +1,11 @@
+mvnw spring-boot:run
+
+Subject: Security Alert: Your account access is limited
+
+Dear User,
+
+We have detected unusual activity on your account. To protect your funds, we have temporarily suspended your access. You must verify your identity within 24 hours to avoid permanent closure.
+
+Please click the link below to secure your account: http://verify-bank-security.com/login
+
+Failure to act will result in account termination.

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AI Analysis Report</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+        .result-container { max-width: 650px; margin: 50px auto; padding: 40px; background: white; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); text-align: center; }
+        .url-display { background: #f4f7f6; padding: 15px; border-radius: 8px; font-family: monospace; word-break: break-all; margin: 20px 0; border: 1px solid #ddd; }
+        .risk-badge { font-size: 1.5rem; font-weight: bold; margin: 15px 0; }
+        .action-btn { display: inline-block; padding: 15px 35px; color: white; text-decoration: none; border-radius: 8px; font-weight: bold; margin: 10px; }
+        .btn-safe { background: #27ae60; }
+        .btn-danger { background: #e74c3c; }
+        .btn-pdf { background: #34495e; color: white; border: none; padding: 12px 25px; border-radius: 5px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="result-container" id="reportArea">
+        <h1>Phishing Security Report</h1>
+        <p>Analyzed on: <span id="reportTime"></span></p>
+        
+        <div class="url-display" id="urlText"></div>
+        <hr>
+        
+        <div class="risk-badge" id="riskLevel"></div>
+        <p>AI Confidence Score: <strong id="riskScore"></strong>/100</p>
+        
+        <div id="navigationButton"></div>
+        <br>
+        <button class="btn-pdf" onclick="saveAsPDF()">📥 Save Report as PDF</button>
+        <br><br>
+        <a href="phishing.html?mode=website" style="color: #7f8c8d; text-decoration: none;">← Back to Dashboard</a>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const params = new URLSearchParams(window.location.search);
+            const url = params.get('url');
+            const score = parseInt(params.get('score')) || 0;
+            const level = params.get('level') || "Low Risk";
+
+            document.getElementById('urlText').innerText = url;
+            document.getElementById('riskLevel').innerText = "AI Assessment: " + level;
+            document.getElementById('riskScore').innerText = score;
+            document.getElementById('reportTime').innerText = new Date().toLocaleString();
+
+            const navArea = document.getElementById('navigationButton');
+            const riskDisplay = document.getElementById('riskLevel');
+
+            if (score < 50) {
+                riskDisplay.style.color = "#27ae60";
+                navArea.innerHTML = `<a href="${url}" target="_blank" class="action-btn btn-safe">Visit Website Safely</a>`;
+            } else {
+                riskDisplay.style.color = "#e74c3c";
+                navArea.innerHTML = `<a href="${url}" target="_blank" class="action-btn btn-danger">Open Anyway (Caution)</a>`;
+            }
+        });
+
+        function saveAsPDF() {
+            const element = document.getElementById('reportArea');
+            const options = {
+                margin: 0.5,
+                filename: 'Phishing_Report.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+            };
+            html2pdf().set(options).from(element).save();
+        }
+    </script>
+</body>
+</html>

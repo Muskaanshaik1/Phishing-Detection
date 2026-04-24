@@ -1,0 +1,188 @@
+* {
+    box-sizing: border-box;
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+body {
+    margin: 0;
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #333;
+}
+
+.container {
+    background: #ffffff;
+    width: 90%;
+    max-width: 700px;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+}
+
+h1 {
+    text-align: center;
+    color: #203a43;
+    margin-bottom: 5px;
+}
+
+.subtitle {
+    text-align: center;
+    color: #666;
+    margin-bottom: 25px;
+}
+
+.input-box {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+.input-box input {
+    flex: 1;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+.input-box button {
+    padding: 12px 18px;
+    border: none;
+    background: #203a43;
+    color: white;
+    font-size: 15px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.input-box button:hover {
+    background: #2c5364;
+}
+
+.result-card {
+    border-top: 1px solid #ddd;
+    padding-top: 20px;
+}
+
+.hidden {
+    display: none;
+}
+
+.risk-badge {
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.risk-low {
+    background: #d4edda;
+    color: #155724;
+}
+
+.risk-medium {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.risk-high {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+h3 {
+    margin-top: 15px;
+    margin-bottom: 8px;
+    color: #203a43;
+}
+
+ul {
+    padding-left: 20px;
+}
+
+ul li {
+    margin-bottom: 6px;
+}
+
+.actions {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.actions button {
+    padding: 10px 20px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.actions button:hover {
+    background: #0056b3;
+}
+/* ---------- RESULT POLISH ---------- */
+
+#result {
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid #ddd;
+}
+
+/* Risk level badge style */
+#riskLevel {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 14px;
+    font-weight: bold;
+    margin-left: 6px;
+}
+
+/* Risk colors (JS applies class: low / medium / high) */
+.low {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.medium {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.high {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+/* Lists look cleaner */
+#result ul {
+    margin-top: 8px;
+    padding-left: 22px;
+}
+
+#result li {
+    margin-bottom: 6px;
+}
+
+/* Visit button polish */
+#visitBtn {
+    display: block;
+    margin: 20px auto 0;
+    padding: 10px 22px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+#visitBtn:hover {
+    background-color: #0056b3;
+}
